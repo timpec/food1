@@ -1,18 +1,24 @@
 import React from 'react';
-import { SafeAreaView, Text, View, StyleSheet , ScrollView, TouchableOpacity} from 'react-native';
+import { SafeAreaView, Text, View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/Ionicons';
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
+import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
 
 const Cart = () => {
-
+  const dispatch = useDispatch();
   const productsInCart = useSelector(state => state.productsInCart)
-  //console.log(productsInCart)
+  let price = 0;
+
+  const priceAddition = (item) => {
+      price = price + item.price;
+  }
 
   // Check item types and return view fitting to it
   const checkType = (item) => {
+    priceAddition(item);
     switch (item.type) {
       case 'PIZZA':
         return (
@@ -31,7 +37,7 @@ const Cart = () => {
               )}
             </View>
             <View style={styles.priceContainer}>
-              <TouchableOpacity onPress={()=> console.log(item)}>
+              <TouchableOpacity onPress={()=> dispatch({type: 'REMOVE_FROM_CART', payload: item})}>
                 <Icon name="close-outline" size={26} color="firebrick" />
               </TouchableOpacity>
             </View>
@@ -46,7 +52,7 @@ const Cart = () => {
               <Text style={styles.priceText} >{item.price.toFixed(2)} €</Text>
             </View>
             <View style={styles.priceContainer}>
-              <TouchableOpacity onPress={()=> console.log(item)}>
+              <TouchableOpacity onPress={()=> dispatch({type: 'REMOVE_FROM_CART', payload: item})}>
                 <Icon name="close-outline" size={26} color="firebrick" />
               </TouchableOpacity>
             </View>
@@ -62,7 +68,7 @@ const Cart = () => {
               <Text style={styles.priceText} >{item.price.toFixed(2)} €</Text>
             </View>
             <View style={styles.priceContainer}>
-              <TouchableOpacity onPress={()=> console.log(item)}>
+              <TouchableOpacity onPress={()=> dispatch({type: 'REMOVE_FROM_CART', payload: item})}>
                 <Icon name="close-outline" size={26} color="firebrick" />
               </TouchableOpacity>
             </View>
@@ -82,7 +88,7 @@ const Cart = () => {
               )}
             </View>
             <View style={styles.priceContainer}>
-              <TouchableOpacity onPress={()=> console.log(item)}>
+              <TouchableOpacity onPress={()=> dispatch({type: 'REMOVE_FROM_CART', payload: item})}>
                 <Icon name="close-outline" size={26} color="firebrick" />
               </TouchableOpacity>
             </View>
@@ -97,7 +103,7 @@ const Cart = () => {
               <Text style={styles.priceText} >{item.price.toFixed(2)} €</Text>
             </View>
             <View style={styles.priceContainer}>
-              <TouchableOpacity onPress={()=> console.log(item)}>
+              <TouchableOpacity onPress={()=> dispatch({type: 'REMOVE_FROM_CART', payload: item})}>
                 <Icon name="close-outline" size={26} color="firebrick" />
               </TouchableOpacity>
             </View>
@@ -108,15 +114,18 @@ const Cart = () => {
 
   return (
       <SafeAreaView  style={{ flex: 1, backgroundColor: "#f5f5f5"}}>
-      <ScrollView>
+      <ScrollView style={{borderWidth: 1, borderColor: "red", flex:1,}}>
         <View style={styles.headerContainer}>
           <Text style={styles.header}>Ostoskorissa {productsInCart.length} tuote(tta).</Text>
         </View>
         {productsInCart.map(item => 
-          <View key={uuidv4()}>
-            {checkType(item)}
-          </View>
+        <View style={{flex:6}} key={uuidv4()}>
+          {checkType(item)}
+        </View>
         )}
+        <View style={styles.finalPriceContainer}>
+          <Text style={styles.finalPrice}>{price.toFixed(2)} €</Text>
+        </View>
         </ScrollView>
       </SafeAreaView>
   );
@@ -126,6 +135,7 @@ const Cart = () => {
 
 const styles = StyleSheet.create ({
   headerContainer: {
+    height: 50,
     alignItems: "center",
     justifyContent: "center",
     margin: 15
@@ -160,6 +170,18 @@ const styles = StyleSheet.create ({
     flex: 1,
     justifyContent: "center",
     alignItems: "flex-end"
+  },
+  finalPriceContainer: {
+    borderColor: "blue",
+    borderWidth: 2,
+    height: 50,
+    width: "90%",
+    alignSelf: "center",
+    alignItems: "center",
+  },
+  finalPrice: {
+    fontFamily: "Verdana",
+    fontSize: 24
   }
 })
 

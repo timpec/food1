@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, Image, ScrollView } from 'react-native';
+import 'react-native-get-random-values';
+import { v4 as uuidv4 } from 'uuid';
 import { Picker } from '@react-native-picker/picker';
 import { useDispatch } from 'react-redux';
+import servingStyles from '../Servings/Styles/ServingStyles'
 
 
-const Drinks = ({data}) => {
+const Drinks = ({navigation, data}) => {
     const dispatch = useDispatch();
     const [mainChoice, setMainChoice] = useState(data[0])
     const sideOptions = mainChoice.options;
@@ -16,24 +19,29 @@ const Drinks = ({data}) => {
 
     const cartObj = () => {
         const object = {
+            key: uuidv4(),
             type: 'DRINK',
             name: mainChoice.name+' '+sideChoice.name,
             price: sideChoice.price
         }
         return object;
     }
-    console.log(cartObj())
+
+    const finishAction = () => {
+        dispatch({type: 'ADD_TO_CART', payload: cartObj()})
+        navigation.popToTop()
+    }
 
   return (
-      <View> 
-        <ScrollView>
           <View style={styles.customizeContainer}>
+              
+      <View style={{flex:9}}> 
               <View style={styles.titleContainer}>
                 <Text style={styles.title}>{mainChoice.name} {sideChoice.name}l</Text>
               </View>
                 <View style={styles.itemsContainer}>
                     {data.map(item =>
-                    <TouchableOpacity key={item.key} onPress={() => setMainChoice(item)} style={{width: "50%", height: 90, borderColorBottom: "#cdcdcdc", borderWidthBottom: 1, alignItems: "center", justifyContent: "center"}}>
+                    <TouchableOpacity key={item.key} onPress={() => setMainChoice(item)} style={styles.drinkItem}>
                         <Image style={styles.image} source={{uri: item.img}}/>
                         <Text>{item.name}</Text>
                     </TouchableOpacity>
@@ -54,78 +62,14 @@ const Drinks = ({data}) => {
                     <Text style={styles.price} >{sideChoice.price.toFixed(2)} €</Text>
                 </View>
             </View>
-        </ScrollView>
-        <TouchableOpacity style={styles.button} onPress={() =>  dispatch({type: 'ADD_TO_CART', payload: cartObj()})}>
+        <TouchableOpacity style={styles.button} onPress={() =>  finishAction()}>
             <Text>Lisää Ostoskoriin</Text>
         </TouchableOpacity>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-    image: {
-        width: 60,
-        height: 60,
-        resizeMode: "contain"
-      },
-    itemsContainer: {
-        flexDirection: "row",
-        flexWrap: "wrap",
-        alignSelf: "center",
-        alignItems: "center",
-        width:"100%"
-    },
-    button: {
-        alignItems: "center",
-        backgroundColor: "#f4e609",
-        height: "8%",
-        width: "100%",
-        justifyContent: "center",
-    },
-    titleContainer: {
-        borderBottomColor: "#cdcdcd",
-        borderBottomWidth: 2
-    },
-    title: {
-        padding: 5,
-        marginVertical: 5,
-        color: "black",
-        alignSelf: "center",
-        fontSize: 26,
-        fontFamily: "Verdana",
-    },
-    customizeContainer: {
-        width: "90%",
-        marginHorizontal: "5%",
-        marginVertical: "10%",
-        padding: 5,
-        backgroundColor: "#f5f5f5",
-        shadowColor: "#000",
-        shadowOffset: {
-	        width: 0,
-	        height: 5,
-        },
-        shadowOpacity: 0.34,
-        shadowRadius: 6.27,
-        elevation: 10,
-    },
-    picker: {
-        marginTop: 10
-    },
-    pickerTitle: {
-        padding: 5,
-        fontSize: 16,
-        fontFamily: "Verdana"
-    },
-    priceContainer: {
-        alignItems: "center",
-        padding: 10
-    },
-    price: {
-        fontSize: 20,
-        fontFamily: "Verdana"
-    }
-});
+const styles = StyleSheet.create(servingStyles);
 
 
 export default Drinks;

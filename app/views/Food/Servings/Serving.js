@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Icon from 'react-native-vector-icons/dist/Ionicons';
-import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View, ScrollView, Image  } from 'react-native';
+import { SafeAreaView, StyleSheet } from 'react-native';
 
 import { kebabAnnokset, kanaAnnokset, vonerAnnokset, falafelAnnokset, rullaAnnokset, zoneAnnokset, salaattiAnnokset, juomat, sides } from '../../../data/data';
 import Kebab from '../../../components/Servings/Kebab';
@@ -13,38 +12,36 @@ import CustomOption from '../../../components/Servings/CustomOption';
 
 const Serving = ({navigation, route}) => {
     useEffect(() => {
-        //setSideChoice()
     }, []);
 
-    const checkType = () => {
+    const checkType = (navigation) => {
         const type = route.params.type
-        console.log(type)
         switch (type) {
             case ('Kebab'):
-                return <Kebab data={kebabAnnokset} />
+                return <Kebab navigation={navigation} data={kebabAnnokset} />
             case ('Salaatti'):
-                return <MultiMainMultiSide data={salaattiAnnokset} />
+                return <MultiMainMultiSide navigation={navigation} data={salaattiAnnokset} />
             case ('Rulla'):
-                return <Kebab data={rullaAnnokset} />
+                return <Kebab navigation={navigation} data={rullaAnnokset} />
             case ('Vöner'):
-                return <MultiSideOption data={vonerAnnokset} />
+                return <MultiSideOption navigation={navigation} data={vonerAnnokset} />
             case ('Zone'):
-                return <MultiMainOption data={zoneAnnokset} />
+                return <MultiMainOption navigation={navigation} data={zoneAnnokset} />
             case ('Falafel'):
-                return <MultiSideOption data={falafelAnnokset} />
+                return <MultiSideOption navigation={navigation} data={falafelAnnokset} />
             case ('Kana'):
-                return <Kebab data={kanaAnnokset} />
+                return <Kebab navigation={navigation} data={kanaAnnokset} />
             case ('Sides'):
-                return <CustomOption data={sides} />
+                return <CustomOption navigation={navigation} data={sides} />
             case ('Juoma'):
-                return <Drinks data={juomat} />
+                return <Drinks navigation={navigation} data={juomat} />
         }
     }
 
 
   return (
         <SafeAreaView  style={{ flex: 1, backgroundColor: "#f5f5f5"}}>
-            {checkType()}
+            {checkType(navigation)}
         </SafeAreaView>
   );
 }

@@ -69,6 +69,24 @@ const PizzaCheck = ({navigation, route}) => {
         }               
     }
 
+    const finishAction = () => {
+        const toCart = {
+            type: data.type,
+            id: data.id,
+            key: uuidv4(),
+            name: data.name,
+            pohja: data.pohja,
+            price: data.price,
+            added: data.added,
+            removed: data.removed,
+            oregano: data.oregano,
+            vs: data.vs,
+            viipale: data.viipale,
+        }
+        dispatch({type: 'ADD_TO_CART', payload: toCart})
+        navigation.popToTop()
+    }
+
   return (
         <SafeAreaView  style={{ flex: 1, backgroundColor: "#f5f5f5"}}>
             <View style={styles.container}>
@@ -101,7 +119,7 @@ const PizzaCheck = ({navigation, route}) => {
                         </View>
                     </View>
             </View>
-            <TouchableOpacity style={styles.button} onPress={() => dispatch({type: 'ADD_TO_CART', payload: data})}>
+            <TouchableOpacity style={styles.button} onPress={() => finishAction()}>
                 <Text>Lisää ostoskoriin</Text>
             </TouchableOpacity>
         </SafeAreaView>

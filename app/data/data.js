@@ -737,6 +737,7 @@ const salaattiLisukkeet = [
     {id: '2', name: 'Ranskalainen'},
     {id: '3', name: 'Sinappi'},
     {id: '4', name: 'Kevyt'},
+    {id: '5', name: 'Ei Kastiketta'}
 ]
 
 export const salaattiAnnokset = [
