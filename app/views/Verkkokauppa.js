@@ -18,6 +18,8 @@ import PizzaTopping from '../views/Food/PizzaBuilder/PizzaTopping';
 import PizzaDetails from '../views/Food/PizzaBuilder/PizzaDetails';
 import PizzaCheck from '../views/Food/PizzaBuilder/PizzaCheck';
 import Serving from './Food/Servings/Serving';
+import OrderDetails from './Cart/OrderDetails';
+import OrderSend from './Cart/OrderSend';
 
 const Verkkokauppa = () => {
 
@@ -25,16 +27,10 @@ const Verkkokauppa = () => {
   //console.log(productsInCart)
 
   const Tabs = createBottomTabNavigator();
-  const AuthStack = createStackNavigator();
   const MenuStack = createStackNavigator();
-
-  const AuthStackScreen = () => (
-    <AuthStack.Navigator>
-      <AuthStack.Screen name="SignIn" component={SignIn} />
-      <AuthStack.Screen name="Register" component={Register} />
-    </AuthStack.Navigator>
-  )
-
+  const CartStack = createStackNavigator();
+  const AuthStack = createStackNavigator();
+  
   const MenuStackScreen = () => (
     <MenuStack.Navigator>
       <MenuStack.Screen name="Menu" component={Menu} />
@@ -49,6 +45,21 @@ const Verkkokauppa = () => {
     </MenuStack.Navigator>
   )
 
+  const AuthStackScreen = () => (
+    <AuthStack.Navigator>
+      <AuthStack.Screen name="SignIn" component={SignIn} />
+      <AuthStack.Screen name="Register" component={Register} />
+    </AuthStack.Navigator>
+  )
+
+  //Order details...
+  const CartStackScreen = () => (
+    <CartStack.Navigator>
+      <CartStack.Screen name="Cart" component={Cart} />
+      <CartStack.Screen name="OrderDetails" component={OrderDetails} />
+      <CartStack.Screen name="OrderSend" component={OrderSend} />
+    </CartStack.Navigator>
+  )
 
   return (
     <SafeAreaProvider>
@@ -78,7 +89,7 @@ const Verkkokauppa = () => {
             keyboardHidesTabBar: "true",
           }} >
           <Tabs.Screen name='Menu' component={MenuStackScreen} />
-          <Tabs.Screen name='Cart' component={Cart} options={{tabBarBadge: productsInCart.length}} />
+          <Tabs.Screen name='Cart' component={CartStackScreen} options={{tabBarBadge: productsInCart.length}} />
           <Tabs.Screen name='Info' component={Info} />
           <Tabs.Screen name='SignIn' component={AuthStackScreen} />
         </Tabs.Navigator>
