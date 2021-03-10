@@ -7,26 +7,65 @@ import { v4 as uuidv4 } from 'uuid';
 
 const OrderDetails = ({navigation, route}) => {
   const toimitus = ["Kuljetus", "Nouto"];
-  const maksu = ["Käteinen", "Pankkikortti"];
+  const noutoajat = ["15", "30", "45", "60"];
+  const maksu = ["Käteinen", "Maksukortti", "Lounasseteli"];
   const [toimitustapa, setToimitustapa] = useState(toimitus[0])
   const [maksutapa, setMaksutapa] = useState(maksu[0])
   const [osoite, setOsoite] = useState("")
+  const [nouto, setNouto] = useState(noutoajat[0])
   const [puhelin, setPuhelin] = useState("")
+
+  // 
+  const deliveryType = () => {
+    if(toimitustapa == toimitus[0]) {
+      return (
+        <View style={styles.h2Container}>
+            <Text style={styles.h2}>Kuljetusosoite *</Text>
+            <TextInput value={osoite} onChangeText={text => setOsoite(text)} style={{borderWidth: 1, borderColor: "#cdcdcd"}}/>
+        </View>
+      )
+    } else {
+      return (
+        <View style={styles.h2Container}>
+            <Text style={styles.h2}>Valitse noutoaika</Text>
+            <Picker prompt="Noutoaika"
+                    selectedValue={nouto}
+                    onValueChange={(itemValue, itemIndex) => 
+                        setNouto(itemValue)} >
+                        {noutoajat.map(item =>
+                            <Picker.Item key={item} label={item+" min kuluttua"} value={item} ></Picker.Item>
+                        )}
+                </Picker>
+        </View>
+      )
+    }
+  }
 
   const continueButton = () => {
       const details = {
         toimitustapa: toimitustapa,
         maksutapa: maksutapa,
         osoite: osoite,
+        nouto: nouto,
         puhelin: puhelin
     }
-    if(osoite != "" && puhelin.length > 6) {
+    if(toimitustapa == toimitus[0]) {
+      if(osoite != "" && puhelin.length > 6) {
         return (
             <TouchableOpacity style={styles.nextButton} onPress={() => navigation.push('OrderSend', {details})} >
                 <Text>Jatka</Text>
             </TouchableOpacity>
         )
-    }  
+      } 
+    } else if(toimitustapa == toimitus[1]) {
+      if(puhelin.length > 6) {
+        return (
+            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.push('OrderSend', {details})} >
+                <Text>Jatka</Text>
+            </TouchableOpacity>
+        )
+      }
+    }
   }
   // Toimitusosoite ?? default from user (postinumero, kaupunginosa, nimi)
   // Puhelinnumero ?? default from user
@@ -63,12 +102,9 @@ const OrderDetails = ({navigation, route}) => {
                             )}
                 </Picker>
             </View>
+            {deliveryType()}
             <View style={styles.h2Container}>
-                <Text style={styles.h2}>Kuljetusosoite</Text>
-                <TextInput value={osoite} onChangeText={text => setOsoite(text)} style={{borderWidth: 1, borderColor: "#cdcdcd"}}/>
-            </View>
-            <View style={styles.h2Container}>
-                <Text style={styles.h2}>Puhelinnumero</Text>
+                <Text style={styles.h2}>Puhelinnumero *</Text>
                 <TextInput keyboardType='phone-pad' value={puhelin} onChangeText={text => setPuhelin(text)} style={{borderWidth: 1, borderColor: "#cdcdcd"}}/>
             </View>
         </ScrollView>
@@ -104,48 +140,11 @@ const styles = StyleSheet.create ({
     fontSize: 20,
     fontFamily: "Verdana"
   },
-  card: {
-    flex: 1,
-    flexDirection: "row",
-    width: "90%",
-    height: undefined,
-    marginBottom: "5%",
-    alignSelf: "center",
-    justifyContent: "space-between",
-    borderBottomColor: "#cdcdcd",
-    paddingVertical: 5,
-    borderBottomWidth: 2,
-  },
-  titleText: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "flex-start"
-  },
-  editsContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  priceContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "flex-end"
-  },
-  finalPriceContainer: {
-    height: 50,
-    width: "90%",
-    alignSelf: "center",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  finalPrice: {
-    fontFamily: "Verdana",
-    fontSize: 24
-  },
   nextButton: {
     width: "100%",
     height: 50,
-    backgroundColor: "lightgreen",
+    marginTop: "5%",
+    backgroundColor: "#f4e609",
     alignItems: "center",
     justifyContent: "center"
   }

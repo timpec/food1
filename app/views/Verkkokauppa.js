@@ -20,6 +20,8 @@ import PizzaCheck from '../views/Food/PizzaBuilder/PizzaCheck';
 import Serving from './Food/Servings/Serving';
 import OrderDetails from './Cart/OrderDetails';
 import OrderSend from './Cart/OrderSend';
+import OrderConfirmed from './Cart/OrderConfirmed';
+import { Image, StyleSheet, View } from 'react-native';
 
 const Verkkokauppa = () => {
 
@@ -33,7 +35,7 @@ const Verkkokauppa = () => {
   
   const MenuStackScreen = () => (
     <MenuStack.Navigator>
-      <MenuStack.Screen name="Menu" component={Menu} />
+      <MenuStack.Screen name="Menu" component={Menu} options={headerImageOptions} />
 
       <MenuStack.Screen name="PizzaStyle" component={PizzaStyle} />
       <MenuStack.Screen name="PizzaPohja" component={PizzaPohja} />
@@ -55,9 +57,10 @@ const Verkkokauppa = () => {
   //Order details...
   const CartStackScreen = () => (
     <CartStack.Navigator>
-      <CartStack.Screen name="Cart" component={Cart} />
-      <CartStack.Screen name="OrderDetails" component={OrderDetails} />
-      <CartStack.Screen name="OrderSend" component={OrderSend} />
+      <CartStack.Screen name="Cart" component={Cart} options={{title: "Ostoskori"}} />
+      <CartStack.Screen name="OrderDetails" component={OrderDetails} options={{title: "Toimitustiedot"}} />
+      <CartStack.Screen name="OrderSend" component={OrderSend} options={{title: "Tilauksen lähetys"}} />
+      <CartStack.Screen name="OrderConfirmed" component={OrderConfirmed} options={{headerLeft: null}} />
     </CartStack.Navigator>
   )
 
@@ -97,6 +100,32 @@ const Verkkokauppa = () => {
     </SafeAreaProvider>
   );
 }
+
+
+const styles = StyleSheet.create({
+  headerImg: {
+    height: 50,
+    width: 200,
+    resizeMode: 'contain',
+  },
+  headerImgContainer: {
+    flex:1,
+    width: "100%",
+    alignSelf: "center",
+    alignContent: "center",
+    justifyContent: "center",
+  }
+});
+
+const headerImageOptions = {
+  headerTitleStyle: {
+    alignSelf: "center"
+  },
+  headerTitle: 
+    <View style={styles.headerImgContainer}>
+      <Image style={styles.headerImg} source={require('../assets/pizzataximlogo1.png')}/>
+    </View>
+  }
 
 
 export default Verkkokauppa;

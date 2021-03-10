@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     },
     innerContainer: {
         width: "50%",
-        paddingTop: 30,
+        paddingVertical: "4%",
         alignItems: "center"
     },
     image: {

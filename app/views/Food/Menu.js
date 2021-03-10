@@ -9,13 +9,11 @@ import QuickInfo from '../../components/QuickInfo';
 
 const Menu = ({navigation}) => {
 
-
+//<Banner/>         <Footer/>
   return (
     <SafeAreaView  style={{ flex: 1, backgroundColor: "#f5f5f5"}}>
       <ScrollView contentContainerStyle={{flexGrow:1}}>
-        <Banner/>
         <FoodMenuItems navigation={navigation} />
-        <Footer/>
       </ScrollView>
     </SafeAreaView>
   );

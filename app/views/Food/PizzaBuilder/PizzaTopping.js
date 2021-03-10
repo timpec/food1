@@ -27,7 +27,9 @@ const PizzaTopping = ({navigation, route}) => {
               })} >
               <Image style={styles.image} source={{uri: item.img}} />
               <View style={styles.textContainer} >
-                <Text style={styles.title} >{item.id}. {item.name}</Text>
+                <View style={{borderBottomColor: "#cdcdcd", borderBottomWidth:2}}>
+                  <Text style={styles.title} >{item.id}. {item.name}</Text>
+                </View>
                 {item.toppings.map(topping => <Text key={item.key+topping} style={styles.toppingsText}>{topping}</Text>)}
               </View>
             </TouchableOpacity>

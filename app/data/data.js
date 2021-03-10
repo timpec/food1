@@ -692,7 +692,8 @@ export const zoneAnnokset = [
         price: 11,
         toppings: [
             "Paahdettu broileri", "BBQ-kastike", "Paprika", "Sinihomejuusto"
-        ]
+        ],
+        img: 'https://pizzataxim.fi/images/zonet.png'
     },
     {
         key: '1',
@@ -701,7 +702,8 @@ export const zoneAnnokset = [
         price: 10,
         toppings: [
             "Kevytfeta", "Punasipuli", "Paprika", "Kastike"
-        ]
+        ],
+        img: 'https://pizzataxim.fi/images/zonet.png'
     },
     {
         key: '2',
@@ -710,7 +712,8 @@ export const zoneAnnokset = [
         price: 11,
         toppings: [
             "Paahdettu broileri", "Tacokastike", "Ananas", "Punasipuli"
-        ]
+        ],
+        img: 'https://pizzataxim.fi/images/zonet.png'
     },
     {
         key: '3',
@@ -719,7 +722,8 @@ export const zoneAnnokset = [
         price: 11,
         toppings: [
             "Pepperoni", "Punasipuli", "Salaatti", "Sinihomejuusto"
-        ]
+        ],
+        img: 'https://pizzataxim.fi/images/zonet.png'
     },
     {
         key: '4',
@@ -728,7 +732,8 @@ export const zoneAnnokset = [
         price: 10.5,
         toppings: [
             "Kebabliha", "Pepperoni", "Salaatti", "Kastike"
-        ]
+        ],
+        img: 'https://pizzataxim.fi/images/zonet.png'
     }
 ]
 

@@ -15,7 +15,7 @@ const fetchPost = async (data) => {
             body: JSON.stringify(data)
         })
         let res = await post.json();
-        console.log(res)
+        return res;
     } catch (error) {
         console.error(error);
     }

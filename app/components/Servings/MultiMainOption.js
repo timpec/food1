@@ -36,6 +36,9 @@ const MultiMainOption = ({navigation, data}) => {
             <View style={styles.titleContainer}>
                 <Text style={styles.title} >{mainChoice.id}. {mainChoice.name}</Text>
             </View>
+            <View style={styles.imgContainer}>
+                <Image style={styles.img} source={{uri: mainChoice.img}} />
+            </View>
             <View style={styles.picker}>
                 <Text style={styles.pickerTitle}>Zonen Valinta</Text>
                 <Picker prompt="Valitse Zone-annos"

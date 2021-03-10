@@ -2,81 +2,73 @@ import React, { useState } from 'react';
 import { SafeAreaView, Text, View, StyleSheet, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
-import { useSelector } from 'react-redux';
-import fetchPost from '../../modules/mailer';
 import { alvAmmount, cartPrice, checkTypeSimple } from '../../components/Cart/CartBuilder';
 
 
-const OrderSend = ({navigation, route}) => {
-    const routeDetails = route.params.details
-    const productsInCart = useSelector(state => state.productsInCart)
+const OrderConfirmed = ({navigation, route}) => {
+    const routeDetails = route.params.order
 
-    const deliveryType = () => {
-      if (routeDetails.toimitustapa == "Nouto") {
-        return routeDetails.nouto+" min kuluessa";
-      } else {
-        return routeDetails.osoite;
-      }
-    }
-
-    const wait4Response = async () => {
-      const order = {
-        token: 'pizzataxim',
-        orderType: routeDetails.toimitustapa,
-        orderDetail: deliveryType(),
-        orderPhone: routeDetails.puhelin,
-        orderPayment: routeDetails.maksutapa,
-        orderPrice: cartPrice(productsInCart),
-        orderAlv: alvAmmount(productsInCart),
-        orderProducts: productsInCart
-      }
-      let result = await fetchPost(order);
-      console.log(result)
-      if (result.message == 200) {
-        console.log("check")
-        navigation.push('OrderConfirmed', {order})
-      }
-    }
 
   return (
     <SafeAreaView  style={{ flex: 1, backgroundColor: "#f5f5f5"}}>
         <ScrollView contentContainerStyle={{flexGrow:1}}>
+            <View style={styles.card}>
             <View style={styles.headerContainer}>
-                <Text style={styles.header}>Tilauksen tiedot</Text>
+                <Text style={styles.header}>Tilauksesi on lähetetty</Text>
             </View>
             <View style={{flexDirection: "row", justifyContent: "space-between", width: "90%", alignSelf: "center"}}>
                 <View style={styles.h2ContainerRight}>
                     <Text style={styles.h2}>Toimitus</Text>
-                    <Text>{routeDetails.toimitustapa}</Text>
-                    <Text>{deliveryType()}</Text>
-                    <Text>{routeDetails.puhelin}</Text>
+                    <Text>{routeDetails.orderType}</Text>
+                    <Text>{routeDetails.orderDetail}</Text>
+                    <Text>{routeDetails.orderPhone}</Text>
                 </View>
                 <View style={styles.h2ContainerLeft}>
                     <Text style={styles.h2}>Maksu</Text>
-                    <Text>{routeDetails.maksutapa}</Text>
-                    <Text>ALV 14%: {alvAmmount(productsInCart).toFixed(2)} €</Text>
-                    <Text>Loppusumma: {cartPrice(productsInCart).toFixed(2)} €</Text>
+                    <Text>{routeDetails.orderPayment}</Text>
+                    <Text>ALV 14%: {routeDetails.orderAlv.toFixed(2)} €</Text>
+                    <Text>Summa: {routeDetails.orderPrice.toFixed(2)} €</Text>
                 </View>
             </View>
                 <View style={{width: "90%", alignSelf: "center", marginTop: "8%"}}>
-                    <Text style={styles.h2}>Tuotteet</Text>
+                    <Text style={styles.h2}>Tilatut tuotteet</Text>
                 </View>
                 <View style={styles.productContainer}>
-                  {productsInCart.map(item => 
+                  {routeDetails.orderProducts.map(item => 
                   <View key={uuidv4()}>
                     {checkTypeSimple(item)}
                   </View>
                   )}
                 </View>
-                <TouchableOpacity style={styles.nextButton} onPress={() => wait4Response()} >
-                  <Text>Lähetä tilaus</Text>
-                </TouchableOpacity>
+                <View style={{marginTop:"3%"}}></View>
+            </View>
+            <TouchableOpacity style={styles.nextButton} onPress={() => navigation.popToTop()} >
+                <Text>Palaa etusivulle</Text>
+            </TouchableOpacity>
         </ScrollView>
     </SafeAreaView>
   );
 }
+// textinput onendediting
+// onPress={()=> fetchPost(productsInCart)}
+//{item.toppings.map(topping => <Text key={item.key+topping} style={styles.toppingsText}>{topping}</Text>)}
 
 const styles = StyleSheet.create ({
+    card: {
+        flex: 1,
+        marginBottom: "5%",
+        marginTop: "10%",
+        marginHorizontal: "5%",
+        backgroundColor: "beige",
+        shadowColor: "#000",
+        shadowOffset: {
+	        width: 0,
+	        height: 5,
+        },
+        shadowOpacity: 0.34,
+        shadowRadius: 6.27,
+        elevation: 10,
+    },
   headerContainer: {
     alignSelf: "center",
     width: "90%",
@@ -121,4 +113,4 @@ const styles = StyleSheet.create ({
   }
 })
 
-export default OrderSend;
+export default OrderConfirmed;

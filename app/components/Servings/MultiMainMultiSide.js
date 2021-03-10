@@ -39,8 +39,8 @@ const MultiMainMultiSide = ({navigation, data}) => {
             <View style={styles.titleContainer}>
                 <Text style={styles.title} >{mainChoice.id}. {mainChoice.name}</Text>
             </View>
-            <Text>Salaatin Valinta</Text>
             <View style={styles.picker}>
+            <Text>Salaatin Valinta</Text>
                     <Picker prompt="Valitse salaattisi"
                             selectedValue={mainChoice}
                             onValueChange={(itemValue, itemIndex) => 
@@ -50,8 +50,8 @@ const MultiMainMultiSide = ({navigation, data}) => {
                                 )}
                     </Picker>
                 </View>
-                <Text>Kastikkeen Valinta</Text>
                 <View style={styles.picker}>
+                <Text>Kastikkeen Valinta</Text>
                     <Picker prompt="Valitse salaatinkastike"
                             selectedValue={sideChoice}
                             onValueChange={(itemValue, itemIndex) => 

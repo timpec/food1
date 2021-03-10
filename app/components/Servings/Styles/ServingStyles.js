@@ -37,7 +37,7 @@ const servingStyles = {
     picker: {
         borderColor: "#2ed165",
         borderWidth: 1,
-        marginTop: "8%"
+        marginTop: "5%"
     },
     pickerTitle: {
         padding: 5,
@@ -98,6 +98,14 @@ const servingStyles = {
         marginTop: 5,
         alignItems: "center",
         justifyContent: "center"
+    },
+    imgContainer: {
+        
+    },
+    img: {
+        width: undefined,
+        height: 180,
+        resizeMode: "contain"
     }
 };
 
