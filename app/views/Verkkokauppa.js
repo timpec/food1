@@ -24,9 +24,7 @@ import OrderConfirmed from './Cart/OrderConfirmed';
 import { Image, StyleSheet, View } from 'react-native';
 
 const Verkkokauppa = () => {
-
   const productsInCart = useSelector(state => state.productsInCart)
-  //console.log(productsInCart)
 
   const Tabs = createBottomTabNavigator();
   const MenuStack = createStackNavigator();
@@ -37,20 +35,20 @@ const Verkkokauppa = () => {
     <MenuStack.Navigator>
       <MenuStack.Screen name="Menu" component={Menu} options={headerImageOptions} />
 
-      <MenuStack.Screen name="PizzaStyle" component={PizzaStyle} />
-      <MenuStack.Screen name="PizzaPohja" component={PizzaPohja} />
-      <MenuStack.Screen name="PizzaTopping" component={PizzaTopping} />
-      <MenuStack.Screen name="PizzaDetails" component={PizzaDetails} />
-      <MenuStack.Screen name="PizzaCheck" component={PizzaCheck} />
+      <MenuStack.Screen name="PizzaStyle" component={PizzaStyle} options={{title: "Minkälaisen pizzan haluaisit"}} />
+      <MenuStack.Screen name="PizzaPohja" component={PizzaPohja} options={{title: "Pizzapohjan valinta"}} />
+      <MenuStack.Screen name="PizzaTopping" component={PizzaTopping} options={{title: "Valitse pizzasi"}} />
+      <MenuStack.Screen name="PizzaDetails" component={PizzaDetails} options={{title: "Pizzasi muutokset"}} />
+      <MenuStack.Screen name="PizzaCheck" component={PizzaCheck} options={{title: "Pizzasi tiedot"}} />
 
-      <MenuStack.Screen name="Serving" component={Serving} />
+      <MenuStack.Screen name="Serving" component={Serving} options={{title: "Tuotteen valinta"}} />
     </MenuStack.Navigator>
   )
 
   const AuthStackScreen = () => (
     <AuthStack.Navigator>
-      <AuthStack.Screen name="SignIn" component={SignIn} />
-      <AuthStack.Screen name="Register" component={Register} />
+      <AuthStack.Screen name="SignIn" component={SignIn} options={{title: "Sisäänkirjautuminen"}} />
+      <AuthStack.Screen name="Register" component={Register} options={{title: "Rekisteröityminen"}} />
     </AuthStack.Navigator>
   )
 
@@ -91,10 +89,10 @@ const Verkkokauppa = () => {
             activeTintColor: "black",
             keyboardHidesTabBar: "true",
           }} >
-          <Tabs.Screen name='Menu' component={MenuStackScreen} />
-          <Tabs.Screen name='Cart' component={CartStackScreen} options={{tabBarBadge: productsInCart.length}} />
-          <Tabs.Screen name='Info' component={Info} />
-          <Tabs.Screen name='SignIn' component={AuthStackScreen} />
+          <Tabs.Screen name='Menu' component={MenuStackScreen} options={{title: "Ruokalista"}} />
+          <Tabs.Screen name='Cart' component={CartStackScreen} options={{title: "Ostoskori", tabBarBadge: productsInCart.length}} />
+          <Tabs.Screen name='Info' component={Info} options={{title: "Tietoja"}} />
+          <Tabs.Screen name='SignIn' component={AuthStackScreen} options={{title: "Käyttäjätili"}} />
         </Tabs.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
@@ -125,7 +123,7 @@ const headerImageOptions = {
     <View style={styles.headerImgContainer}>
       <Image style={styles.headerImg} source={require('../assets/pizzataximlogo1.png')}/>
     </View>
-  }
+}
 
 
 export default Verkkokauppa;

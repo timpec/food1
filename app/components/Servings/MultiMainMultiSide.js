@@ -61,10 +61,11 @@ const MultiMainMultiSide = ({navigation, data}) => {
                                 )}
                     </Picker>
                 </View>
-                <View style={{alignItems: "center"}}>
-                    <Text>{mainChoice.price.toFixed(2)} €</Text>
-                </View>
+
             </View>
+            <View style={styles.priceContainer}>
+                    <Text style={styles.price}>{mainChoice.price.toFixed(2)} €</Text>
+                </View>
         <TouchableOpacity style={styles.button} onPress={() => finishAction()}>
             <Text>Ostoskoriin</Text>
         </TouchableOpacity>

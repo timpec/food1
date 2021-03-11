@@ -55,10 +55,10 @@ const MultiMainOption = ({navigation, data}) => {
                 <Text key={item}>{item}</Text>
                 )}
             </View>
-            <View style={styles.priceContainer}>
+        </View>
+        <View style={styles.priceContainer}>
                 <Text style={styles.price} >{mainChoice.price.toFixed(2)} €</Text>
             </View>
-        </View>
         <TouchableOpacity style={styles.button} onPress={() => finishAction()}>
             <Text>Lisää Ostoskoriin</Text>
         </TouchableOpacity>

@@ -14,7 +14,7 @@ const cartItems = (state = initialState, action) => {
             //state.productsInCart = [...state.productsInCart];
             return {...state, productsInCart: [...state.productsInCart]};
         case 'CLEAR_CART':
-
+            return {...state, productsInCart: []};
         default:
             return state;
     }

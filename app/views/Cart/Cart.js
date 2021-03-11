@@ -3,11 +3,13 @@ import { SafeAreaView, Text, View, StyleSheet, ScrollView, TouchableOpacity } fr
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { cartPrice, checkType } from '../../components/Cart/CartBuilder';
 
 
 const Cart = ({navigation}) => {
   const productsInCart = useSelector(state => state.productsInCart)
+  const dispatch = useDispatch();
 
   const continueButton = () => {
     if (productsInCart.length > 0) {
@@ -24,6 +26,9 @@ const Cart = ({navigation}) => {
       <ScrollView contentContainerStyle={{flexGrow:1}}>
         <View style={styles.headerContainer}>
           <Text style={styles.header}>Ostoskorissa {productsInCart.length} tuote(tta).</Text>
+          <TouchableOpacity onPress={() => dispatch({type: 'CLEAR_CART'})}>
+            <Text style={{fontFamily:"Verdana", fontSize:16, color:"red"}}>Tyhjennä</Text>
+          </TouchableOpacity>
         </View>
         <View style={styles.productContainer}>
           {productsInCart.map(item => 
@@ -47,9 +52,13 @@ const Cart = ({navigation}) => {
 const styles = StyleSheet.create ({
   headerContainer: {
     height: 50,
+    flexDirection: "row",
+    marginHorizontal: "5%",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
     marginTop: "3%",
+    borderBottomWidth: 2,
+    borderBottomColor: "#cdcdcd"
   },
   header: {
     fontSize: 20,

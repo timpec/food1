@@ -11,7 +11,6 @@ const PizzaCheck = ({navigation, route}) => {
     const data = route.params.data;
     const price = counter(data.key, data.pohja, data.added, data.removed, data.viipale);
     data.price = price;
-    console.log(data)
     const dispatch = useDispatch();
 
     const pohjaprizeText = (pohja) => {
@@ -24,10 +23,8 @@ const PizzaCheck = ({navigation, route}) => {
     }
 
     const toppingText = (item) => {
-        if(item == data.added[0]) {
-            if(data.removed.length > 0) {
-                return "+ 0€"
-            }
+        if(item == data.added[0] && data.removed.length > 0) {
+            return "+ 0€"
         } else if (data.pohja == "Perhe" || data.pohja == "Pannu") {
             return "+ 2,00€"
         } else {

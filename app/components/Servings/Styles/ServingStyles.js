@@ -1,6 +1,6 @@
 const servingStyles = {
     button: {
-        flex: 1,
+        height: "10%",
         alignItems: "center",
         backgroundColor: "#f4e609",
         width: "100%",

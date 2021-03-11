@@ -7,15 +7,12 @@ import CheckBox from '@react-native-community/checkbox';
 import {Picker} from '@react-native-picker/picker';
 
 import AllToppings from '../../../data/toppings';
-import { pizzat, vegaanipizzat } from '../../../data/data';
+import { pizzat } from '../../../data/data';
 
 
 const PizzaDetails = ({navigation, route}) => {
     const pizza = pizzat[parseInt(route.params.key)];
-
-
     const editableToppings = [...pizza.toppings];
-
     const [newTopping, setNewTopping] = useState(AllToppings[0])
     const [toppings, setToppings] = useState(editableToppings)
     const [added] = useState([])
@@ -32,7 +29,7 @@ const PizzaDetails = ({navigation, route}) => {
         toppings.push(item)
         setToppings([...toppings])
         added.push(item)
-        for (i in removed) {
+        for (let i in removed) {
             if(item == removed[i]) {
                 removed.splice(i, 1)
             }
@@ -45,9 +42,10 @@ const PizzaDetails = ({navigation, route}) => {
         }
         setToppings([...toppings])
         removed.push(item);
-        for (i in added) {
+        for (let i in added) {
             if(item == added[i]) {
                 added.splice(i, 1)
+                break;
             }
         }
     }
@@ -55,8 +53,8 @@ const PizzaDetails = ({navigation, route}) => {
     const checkRemoves = () => {
         const result = [];
         // Only need data of pizzas original toppings removed
-        for (i in pizza.toppings) {
-            for (x in removed) {
+        for (let i in pizza.toppings) {
+            for (let x in removed) {
                 if (pizza.toppings[i] == removed[x]) {
                     result.unshift("- "+removed[x])
                 }
@@ -67,16 +65,23 @@ const PizzaDetails = ({navigation, route}) => {
 
     const checkAdds = () => {
         const result = [];
-        // Only need data of pizzas original toppings removed
-        for (i in pizza.toppings) {
-            for (x in added) {
+        let tempAdded = [...added]
+        console.log(tempAdded)
+        let uniq = new Set();
+        for (let i in pizza.toppings) {
+            for (let x in added) {
                 if (pizza.toppings[i] == added[x]) {
-                    added.splice(x , 1)
+                    uniq.add(added[x])
+                    tempAdded.splice(x , 1)
                 }
             }
         }
-        for (i in added) {
-            result.push("+ "+added[i])
+        console.log(uniq)
+        for (let i in tempAdded) {
+            result.push("+ "+tempAdded[i])
+        }
+        for (let i in uniq) {
+            result.push("+ "+uniq[i])
         }
         return result;
     }
@@ -100,9 +105,12 @@ const PizzaDetails = ({navigation, route}) => {
 
   return (
         <SafeAreaView  style={{ flex: 1, backgroundColor: "#f5f5f5"}}>
-            <ScrollView style={styles.container}>
-                    <Text style={styles.title} >{pizza.id}. {pizza.name}</Text>
-                    <View style={styles.customizeContainer}>
+            <ScrollView contentContainerStyle={{flexGrow:1}}>
+                <View style={styles.customizeContainer}>
+                    <View style={styles.titleContainer}>
+                        <Text style={styles.title} >{pizza.id}. {pizza.name}</Text>
+                    </View>
+                    <View style={styles.editorContainer}>
                         {toppings.map(item =>
                         <View key={uuidv4()} style={styles.itemContainer}>
                             <Text style={styles.itemText}>{item}</Text>
@@ -112,63 +120,69 @@ const PizzaDetails = ({navigation, route}) => {
                         </View>
                         )}
                         <View style={styles.picker}>
-                        <Picker prompt="Valitse täyte"
-                                selectedValue={newTopping}
-                                onValueChange={(itemValue, itemIndex) => 
-                                    setNewTopping(itemValue)} >
-                            {AllToppings.map(item =>
-                                <Picker.Item key={item} label={item} value={item} ></Picker.Item>
-                            )}
-                        </Picker>
+                            <Picker prompt="Valitse täyte"
+                                    selectedValue={newTopping}
+                                    onValueChange={(itemValue, itemIndex) => 
+                                        setNewTopping(itemValue)} >
+                                        {AllToppings.map(item =>
+                                            <Picker.Item key={item} label={item} value={item} ></Picker.Item>
+                                        )}
+                            </Picker>
                         </View>
                         <TouchableOpacity style={styles.addContainer} onPress={()=>addItem(newTopping)}>
                             <Text style={styles.addButton} >Lisää täyte</Text>
                             <Icon name="add-outline" size={20} color="green" />
                         </TouchableOpacity>
                     </View>
-                <View style={styles.extraContainer}>
-                    <View style={styles.extraItem}>
-                        <CheckBox style={styles.checkBox} value={oreganoCheck} onValueChange={(newValue)=>setOreganoCheck(newValue)} />
-                        <Text>Oregano</Text>
-                    </View>
-                    <View style={styles.extraItem}>
-                        <CheckBox style={styles.checkBox} value={vsCheck} onValueChange={(newValue)=>setVSCheck(newValue)} />
-                        <Text>Valkosipuli</Text>
-                    </View>
-                    <View style={styles.extraItem}>
-                        <CheckBox style={styles.checkBox} value={viipaleCheck} onValueChange={(newValue)=>setViipaleCheck(newValue)} />
-                        <Text>Viipalointi</Text>
+                    <View style={styles.extraContainer}>
+                        <View style={styles.extraItem}>
+                            <CheckBox style={styles.checkBox} value={oreganoCheck} onValueChange={(newValue)=>setOreganoCheck(newValue)} />
+                            <Text>Oregano</Text>
+                        </View>
+                        <View style={styles.extraItem}>
+                            <CheckBox style={styles.checkBox} value={vsCheck} onValueChange={(newValue)=>setVSCheck(newValue)} />
+                            <Text>Valkosipuli</Text>
+                        </View>
+                        <View style={styles.extraItem}>
+                            <CheckBox style={styles.checkBox} value={viipaleCheck} onValueChange={(newValue)=>setViipaleCheck(newValue)} />
+                            <Text>Viipalointi</Text>
+                        </View>
                     </View>
                 </View>
-                </ScrollView>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.push('PizzaCheck', {
-                    data: pizzaObj()
-                    })}>
-                    <Text>Yhteenvetoon</Text>
-                </TouchableOpacity>
+            </ScrollView>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.push('PizzaCheck', {
+                        data: pizzaObj()
+                        })}>
+                        <Text>Yhteenvetoon</Text>
+            </TouchableOpacity>
         </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-    container: {
-    },
     button: {
+        height: 50,
         alignItems: "center",
         backgroundColor: "#f4e609",
-        height: "8%",
         width: "100%",
         justifyContent: "center",
+        alignSelf: "flex-end"
+    },
+    titleContainer: {
+        borderBottomColor: "#cdcdcd",
+        borderBottomWidth: 2
     },
     title: {
         padding: 5,
+        marginVertical: 5,
         color: "black",
         alignSelf: "center",
         fontSize: 26,
-        fontFamily: "Verdana"
+        fontFamily: "Verdana",
     },
     customizeContainer: {
         width: "90%",
+        height: "85%",
         marginHorizontal: "5%",
         marginVertical: "10%",
         padding: 5,
@@ -205,28 +219,22 @@ const styles = StyleSheet.create({
     },
     extraContainer: {
         width: "90%",
-        marginHorizontal: "5%",
-        marginVertical: "5%",
+        marginVertical: "3%",
+        marginTop: "3%",
         justifyContent: "space-evenly",
-        backgroundColor: "#f5f5f5",
-        shadowColor: "#000",
-        shadowOffset: {
-	        width: 0,
-	        height: 5,
-        },
-        shadowOpacity: 0.34,
-        shadowRadius: 6.27,
-        elevation: 10,
     },
     extraItem: {
         flexDirection: "row",
         alignItems: "center"
     },
+    editorContainer: {
+        marginTop: "3%"
+    },
     picker: {
         borderColor: "#2ed165",
         borderBottomWidth: 0,
         borderWidth: 1,
-        marginTop: 10
+        marginTop: "3%",
     },
     checkBox: {
         transform: [

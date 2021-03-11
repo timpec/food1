@@ -3,6 +3,7 @@ import { SafeAreaView, Text, View, StyleSheet, ScrollView, TouchableOpacity, Tex
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import fetchPost from '../../modules/mailer';
 import { alvAmmount, cartPrice, checkTypeSimple } from '../../components/Cart/CartBuilder';
 
@@ -10,6 +11,7 @@ import { alvAmmount, cartPrice, checkTypeSimple } from '../../components/Cart/Ca
 const OrderSend = ({navigation, route}) => {
     const routeDetails = route.params.details
     const productsInCart = useSelector(state => state.productsInCart)
+    const dispatch = useDispatch();
 
     const deliveryType = () => {
       if (routeDetails.toimitustapa == "Nouto") {
@@ -35,6 +37,7 @@ const OrderSend = ({navigation, route}) => {
       if (result.message == 200) {
         console.log("check")
         navigation.push('OrderConfirmed', {order})
+        dispatch({type: 'CLEAR_CART'})
       }
     }
 

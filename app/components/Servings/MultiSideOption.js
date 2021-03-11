@@ -49,10 +49,10 @@ const MultiSideOption = ({navigation, data}) => {
                             )}
                 </Picker>
             </View>
-            <View style={styles.priceContainer}>
+        </View>
+        <View style={styles.priceContainer}>
                 <Text style={styles.price}>{sideChoice.price.toFixed(2)} €</Text>
             </View>
-        </View>
         <TouchableOpacity style={styles.button} onPress={() => finishAction()}>
             <Text>Ostoskoriin</Text>
         </TouchableOpacity>
