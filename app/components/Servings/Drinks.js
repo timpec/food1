@@ -48,7 +48,7 @@ const Drinks = ({navigation, data}) => {
                     )}
                 </View>
                 <View style={styles.picker}>
-                    <Text style={styles.pickerTitle}>Valitse koko</Text>
+                    <Text style={styles.pickerText}>Valitse juoman koko</Text>
                     <Picker prompt="Valitse Koko"
                             selectedValue={sideChoice}
                             onValueChange={(itemValue, itemIndex) => 

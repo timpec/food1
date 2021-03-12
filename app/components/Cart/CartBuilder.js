@@ -188,16 +188,6 @@ export const checkType = (item) => {
     }
 
   const styles = StyleSheet.create ({
-    headerContainer: {
-      height: 50,
-      alignItems: "center",
-      justifyContent: "center",
-      margin: 15
-    },
-    header: {
-      fontSize: 20,
-      fontFamily: "Verdana"
-    },
     card: {
       flex: 1,
       flexDirection: "row",
@@ -227,11 +217,4 @@ export const checkType = (item) => {
       alignItems: "flex-end",
       width: "20%"
     },
-    nextButton: {
-      width: "100%",
-      height: 50,
-      backgroundColor: "lightgreen",
-      alignItems: "center",
-      justifyContent: "center"
-    }
   })

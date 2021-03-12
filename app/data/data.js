@@ -613,13 +613,15 @@ export const kebabAnnokset = [
         key: '0',
         id: 'K',
         name: 'Kebab',
-        options: kebabLisukkeet
+        options: kebabLisukkeet,
+        description: 'Kaikkiin kebab-annoksiin sisältyy kebabliha, chili, salaatti, kebabkastiketta sekä lisukevaihtoehto.'
     },
     {
         key: '1',
         id: 'KK',
         name: 'Kanakebab',
-        options: kebabLisukkeet
+        options: kebabLisukkeet,
+        description: 'Kaikkiin kanakebab-annoksiin sisältyy kanakebabliha, chili, salaatti, currykastiketta sekä lisukevaihtoehto.'
     }
 ]
 
@@ -635,7 +637,8 @@ export const vonerAnnokset = [
         key: '0',
         id: 'V',
         name: 'Voner',
-        options: vonerLisukkeet
+        options: vonerLisukkeet,
+        description: 'Kaikkiin vöner-annoksiin sisältyy vöner, chili, salaatti, vegaanikastiketta sekä lisukevaihtoehto.'
     }
 ]
 
@@ -652,13 +655,15 @@ export const kanaAnnokset = [
         key: '0',
         id: 'BR',
         name: 'Broilerfileet currykastikkeella',
-        options: kanaLisukkeet
+        options: kanaLisukkeet,
+        description: 'Neljä broilerinfilettä, salaatti, currykastike sekä lisukevaihtoehto.'
     },
     {
         key: '1',
         id: 'KL',
         name: 'Kalafilee remoulade-kastikkeella',
-        options: kanaLisukkeet
+        options: kanaLisukkeet,
+        description: 'Kalafilee, salaatti, remouladekastike sekä lisukevaihtoehto.'
     }
 ]
 
@@ -674,13 +679,15 @@ export const rullaAnnokset = [
         key: '0',
         id: 'RK',
         name: 'Kebab',
-        options: rullaLisukkeet
+        options: rullaLisukkeet,
+        description: 'Kaikkiin kebabrulla-annoksiin sisältyy kebabia, kebabkastike, majoneesikastiketta, punasipulia, salaattia ja tomaattia.'
     },
     {
         key: '1',
         id: 'RKK',
         name: 'Kanakebab',
-        options: [rullaLisukkeet[0], rullaLisukkeet[1], rullaLisukkeet[3]]
+        options: [rullaLisukkeet[0], rullaLisukkeet[1], rullaLisukkeet[3]],
+        description: 'Kaikkiin kanakebabrulla-annoksiin sisältyy kanakebabia, currykastike, majoneesikastiketta, punasipulia, salaattia ja tomaattia.'
     }
 ]
 
@@ -693,7 +700,7 @@ export const zoneAnnokset = [
         toppings: [
             "Paahdettu broileri", "BBQ-kastike", "Paprika", "Sinihomejuusto"
         ],
-        img: 'https://pizzataxim.fi/images/zonet.png'
+        description: 'Taitettu pizza salaattitäytteellä.'
     },
     {
         key: '1',
@@ -703,7 +710,7 @@ export const zoneAnnokset = [
         toppings: [
             "Kevytfeta", "Punasipuli", "Paprika", "Kastike"
         ],
-        img: 'https://pizzataxim.fi/images/zonet.png'
+        description: 'Taitettu pizza salaattitäytteellä.'
     },
     {
         key: '2',
@@ -713,7 +720,7 @@ export const zoneAnnokset = [
         toppings: [
             "Paahdettu broileri", "Tacokastike", "Ananas", "Punasipuli"
         ],
-        img: 'https://pizzataxim.fi/images/zonet.png'
+        description: 'Taitettu pizza salaattitäytteellä.'
     },
     {
         key: '3',
@@ -723,7 +730,7 @@ export const zoneAnnokset = [
         toppings: [
             "Pepperoni", "Punasipuli", "Salaatti", "Sinihomejuusto"
         ],
-        img: 'https://pizzataxim.fi/images/zonet.png'
+        description: 'Taitettu pizza salaattitäytteellä.'
     },
     {
         key: '4',
@@ -733,7 +740,7 @@ export const zoneAnnokset = [
         toppings: [
             "Kebabliha", "Pepperoni", "Salaatti", "Kastike"
         ],
-        img: 'https://pizzataxim.fi/images/zonet.png'
+        description: 'Taitettu pizza salaattitäytteellä.'
     }
 ]
 
@@ -751,28 +758,32 @@ export const salaattiAnnokset = [
         id: 'S1',
         name: 'Katkarapu- Tonnikala- Feta',
         price: 9.5,
-        options: salaattiLisukkeet
+        options: salaattiLisukkeet,
+        description: 'Kaikkiin salaatti-annoksiin sisältyy jäävuorisalaattia, tomaattia, kurkkua, valitsemasi kastike sekä valitsemasi täytteet.'
     },
     {
         key: '1',
         id: 'S2',
         name: 'Feta- Oliivi- Punasipuli',
         price: 9.5,
-        options: salaattiLisukkeet
+        options: salaattiLisukkeet,
+        description: 'Kaikkiin salaatti-annoksiin sisältyy jäävuorisalaattia, tomaattia, kurkkua, valitsemasi kastike sekä valitsemasi täytteet.'
     },
     {
         key: '2',
         id: 'S3',
         name: 'Lämmin broileri- Paprika- Ananas- Aurajuusto',
         price: 9.5,
-        options: salaattiLisukkeet
+        options: salaattiLisukkeet,
+        description: 'Kaikkiin salaatti-annoksiin sisältyy jäävuorisalaattia, tomaattia, kurkkua, valitsemasi kastike sekä valitsemasi täytteet.'
     },
     {
         key: '3',
         id: 'S4',
         name: 'Rucola- Kesäkurpitsa- Artisokka- Avocado',
         price: 9.5,
-        options: salaattiLisukkeet
+        options: salaattiLisukkeet,
+        description: 'Kaikkiin salaatti-annoksiin sisältyy jäävuorisalaattia, tomaattia, kurkkua, valitsemasi kastike sekä valitsemasi täytteet.'
     },
     {
         key: '4',
@@ -780,9 +791,8 @@ export const salaattiAnnokset = [
         name: 'Oma Valinta Salaatti',
         price: 11,
         options: salaattiLisukkeet,
-        toppings: [
-            "Kebabliha", "Pepperoni", "Salaatti", "Kastike"
-        ]
+        description: 'Kaikkiin salaatti-annoksiin sisältyy jäävuorisalaattia, tomaattia, kurkkua, valitsemasi kastike sekä valitsemasi täytteet.',
+        toppings: []
     }
 ]
 
@@ -800,7 +810,8 @@ export const falafelAnnokset = [
         key: '0',
         id: 'F',
         name: 'Falafel',
-        options: falafelLisukkeet
+        options: falafelLisukkeet,
+        description: 'Kaikkiin falafel-annoksiin sisältyy chili, salaatti, kastiketta sekä lisukevaihtoehto.'
     }
 ]
 

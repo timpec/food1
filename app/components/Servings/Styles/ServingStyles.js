@@ -1,6 +1,6 @@
 const servingStyles = {
     button: {
-        height: "10%",
+        height: "8%",
         alignItems: "center",
         backgroundColor: "#f4e609",
         width: "100%",
@@ -35,19 +35,19 @@ const servingStyles = {
         elevation: 10,
     },
     picker: {
-        borderColor: "#2ed165",
+        borderColor: "#f4e609",
         borderWidth: 1,
         marginTop: "5%"
     },
-    pickerTitle: {
-        padding: 5,
-        fontSize: 16,
-        fontFamily: "Verdana"
+    pickerText: {
+        paddingHorizontal: 8,
+        paddingTop: 5
     },
     priceContainer: {
         alignItems: "center",
-        padding: 10,
-        marginTop: "8%"
+        justifyContent: "center",
+        alignSelf: "center",
+        paddingHorizontal:10
     },
     price: {
         fontSize: 20,
@@ -59,7 +59,7 @@ const servingStyles = {
         alignSelf: "center",
         alignItems: "center",
         width:"100%",
-        marginTop: "8%"
+        marginTop: "5%"
     },
     dipContainer: {
         paddingTop: 5,
@@ -90,7 +90,7 @@ const servingStyles = {
         alignSelf: "center",
         alignItems: "center",
         width:"100%",
-        marginTop: "8%"
+        marginTop: "5%"
     },
     drinkItem : {
         width: "32%",
@@ -99,13 +99,43 @@ const servingStyles = {
         alignItems: "center",
         justifyContent: "center"
     },
-    imgContainer: {
-        
+    descriptionContainer: {
+        marginTop: "5%",
     },
-    img: {
-        width: undefined,
-        height: 180,
-        resizeMode: "contain"
+    descriptionTitle: {
+        fontSize: 18,
+        fontFamily: "Verdana"
+    },
+    description: {
+        fontSize: 15,
+        marginTop: 3
+    },
+    ammountContainer: {
+        flexDirection: "row",
+    },
+    ammountChangeButton: {
+        paddingHorizontal: 10
+    },
+    ammountText: {
+        fontSize: 20
+    },
+    promptContainer: {
+        alignSelf:"center",
+        alignItems:"center",
+        justifyContent:"center"
+    },
+    bottomComponents: {
+        marginTop: "5%",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        borderTopWidth: 1,
+        borderTopColor: "#cdcdcd",
+        paddingVertical: 10
+    },
+    priceArea: {
+        marginBottom: "5%",
+        flexDirection: "row",
+        justifyContent: "space-between",
     }
 };
 

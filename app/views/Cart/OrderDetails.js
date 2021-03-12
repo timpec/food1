@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 const OrderDetails = ({navigation, route}) => {
   const toimitus = ["Kuljetus", "Nouto"];
   const noutoajat = ["15", "30", "45", "60"];
-  const maksu = ["Käteinen", "Maksukortti", "Lounasseteli"];
+  const maksu = ["Käteinen", "Maksukortti", "Lounasseteli", "ePassi"];
   const [toimitustapa, setToimitustapa] = useState(toimitus[0])
   const [maksutapa, setMaksutapa] = useState(maksu[0])
   const [osoite, setOsoite] = useState("")
@@ -142,7 +142,7 @@ const styles = StyleSheet.create ({
   },
   nextButton: {
     width: "100%",
-    height: 50,
+    height: "8%",
     marginTop: "5%",
     backgroundColor: "#f4e609",
     alignItems: "center",

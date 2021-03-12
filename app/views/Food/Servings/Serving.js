@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native';
 
 import { kebabAnnokset, kanaAnnokset, vonerAnnokset, falafelAnnokset, rullaAnnokset, zoneAnnokset, salaattiAnnokset, juomat, sides } from '../../../data/data';
 import Kebab from '../../../components/Servings/Kebab';
@@ -45,31 +45,5 @@ const Serving = ({navigation, route}) => {
         </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-    title: {
-        padding: 5,
-        color: "black",
-        alignSelf: "center",
-        fontSize: 26,
-        fontFamily: "Verdana"
-    },
-    customizeContainer: {
-        width: "90%",
-        marginHorizontal: "5%",
-        marginVertical: "10%",
-        padding: 5,
-        backgroundColor: "#f5f5f5",
-        shadowColor: "#000",
-        shadowOffset: {
-	        width: 0,
-	        height: 5,
-        },
-        shadowOpacity: 0.34,
-        shadowRadius: 6.27,
-        elevation: 10,
-    },
-});
-
 
 export default Serving;

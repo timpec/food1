@@ -9,6 +9,8 @@ import { alvAmmount, cartPrice, checkTypeSimple } from '../../components/Cart/Ca
 
 
 const OrderSend = ({navigation, route}) => {
+    const [info, setInfo] = useState("")
+
     const routeDetails = route.params.details
     const productsInCart = useSelector(state => state.productsInCart)
     const dispatch = useDispatch();
@@ -32,12 +34,17 @@ const OrderSend = ({navigation, route}) => {
         orderAlv: alvAmmount(productsInCart),
         orderProducts: productsInCart
       }
-      let result = await fetchPost(order);
-      console.log(result)
-      if (result.message == 200) {
-        console.log("check")
-        navigation.push('OrderConfirmed', {order})
-        dispatch({type: 'CLEAR_CART'})
+      try {
+        let result = await fetchPost(order);
+        console.log(result)
+        if (result.message == 200) {
+          console.log("check")
+          navigation.push('OrderConfirmed', {order})
+          dispatch({type: 'CLEAR_CART'})
+        }
+      } catch (err) {
+        // Add toast or something telling the problem to customer
+        console.log("Error sending order: " +err)
       }
     }
 
@@ -71,10 +78,14 @@ const OrderSend = ({navigation, route}) => {
                   </View>
                   )}
                 </View>
-                <TouchableOpacity style={styles.nextButton} onPress={() => wait4Response()} >
-                  <Text>Lähetä tilaus</Text>
-                </TouchableOpacity>
+                <View style={styles.h2Container}>
+                  <Text style={styles.h3}>Lisätiedot</Text>
+                  <TextInput placeholder="Ovikoodi, allergiat, muuta huomioitavaa?" multiline numberOfLines={4} value={info} onChangeText={text => setInfo(text)} style={{borderWidth: 1, borderColor: "#cdcdcd"}}/>
+                </View>
         </ScrollView>
+        <TouchableOpacity style={styles.nextButton} onPress={() => wait4Response()} >
+                  <Text>Lähetä tilaus</Text>
+        </TouchableOpacity>
     </SafeAreaView>
   );
 }
@@ -93,17 +104,23 @@ const styles = StyleSheet.create ({
     fontSize: 24,
     fontFamily: "Verdana"
   },
+  h2Container: {
+    alignSelf: "center",
+    justifyContent: "center",
+    width: "90%",
+    marginTop: "8%"
+  },
   h2ContainerRight: {
     alignSelf: "flex-start",
     justifyContent: "center",
-    width: "40%",
+    width: "45%",
     marginTop: "8%",
     alignItems: "flex-start"
   },
   h2ContainerLeft: {
     alignSelf: "flex-start",
     justifyContent: "center",
-    width: "40%",
+    width: "45%",
     marginTop: "8%",
     alignItems: "flex-end",
   },
@@ -111,12 +128,16 @@ const styles = StyleSheet.create ({
     fontSize: 18,
     fontFamily: "Verdana",
   },
+  h3: {
+    fontSize: 15,
+    fontFamily: "Verdana",
+  },
   productContainer: {
     flex: 1,
   },
   nextButton: {
     width: "100%",
-    height: 50,
+    height: "8%",
     marginTop: "5%",
     backgroundColor: "#f4e609",
     alignItems: "center",

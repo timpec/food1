@@ -161,7 +161,7 @@ const PizzaDetails = ({navigation, route}) => {
 
 const styles = StyleSheet.create({
     button: {
-        height: 50,
+        height: "8%",
         alignItems: "center",
         backgroundColor: "#f4e609",
         width: "100%",

@@ -18,11 +18,11 @@ const SignIn = ({navigation}) => {
             </View>
           </View>
           <View style={styles.lowerContainer} >
-            <TouchableOpacity style={{ width: "90%", alignItems: "center"}} >
-              <Text style={{color: "black", fontFamily: "Verdana", fontSize: 16}} >Unohditko salasanasi?</Text>
-            </TouchableOpacity>
             <TouchableOpacity style={styles.signinButton} >
               <Text style={{color: "black", fontFamily: "Verdana", fontSize: 16}} >Kirjaudu sisään</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{marginTop: "5%", width: "90%",  alignItems: "center"}} >
+              <Text style={{color: "black", fontFamily: "Verdana", fontSize: 16}} >Unohditko salasanasi?</Text>
             </TouchableOpacity>
             <TouchableOpacity style={{marginTop: "5%", width: "90%",  alignItems: "center"}} >
               <Text onPress={() => navigation.push('Register')} style={{color: "black", fontFamily: "Verdana", fontSize: 16}} >Luo tili</Text>
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "center",
     alignContent: "space-around",
-    marginVertical: "5%"
+    marginTop: "5%"
   },
   lowerContainer: {
     flex: 4,
@@ -66,9 +66,17 @@ const styles = StyleSheet.create({
     marginHorizontal: "25%",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#cdcdcd",
-    borderWidth: 2,
-    borderColor: "#f4e609",
+    borderColor: "black",
+    borderWidth: 1,
+    backgroundColor: "#f4e609",
+        shadowColor: "#000",
+        shadowOffset: {
+	        width: 0,
+	        height: 5,
+        },
+        shadowOpacity: 0.34,
+        shadowRadius: 6.27,
+        elevation: 10,
   },
   innerContainer: {
       height: 60,
@@ -77,6 +85,17 @@ const styles = StyleSheet.create({
       backgroundColor: "#cdcdcd",
       borderTopLeftRadius: 25,
       borderBottomRightRadius: 25,
+      borderColor: "black",
+      borderWidth: 1,
+      backgroundColor: "#cdcdcd",
+        shadowColor: "#000",
+        shadowOffset: {
+	        width: 0,
+	        height: 5,
+        },
+        shadowOpacity: 0.34,
+        shadowRadius: 6.27,
+        elevation: 10,
   },
   inputField: {
       color: "black",

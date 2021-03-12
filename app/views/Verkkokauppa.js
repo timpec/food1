@@ -47,8 +47,8 @@ const Verkkokauppa = () => {
 
   const AuthStackScreen = () => (
     <AuthStack.Navigator>
-      <AuthStack.Screen name="SignIn" component={SignIn} options={{title: "Sisäänkirjautuminen"}} />
-      <AuthStack.Screen name="Register" component={Register} options={{title: "Rekisteröityminen"}} />
+      <AuthStack.Screen name="SignIn" component={SignIn} options={{title: "Kirjaudu sisään"}} />
+      <AuthStack.Screen name="Register" component={Register} options={{title: "Rekisteröidy"}} />
     </AuthStack.Navigator>
   )
 
@@ -102,8 +102,8 @@ const Verkkokauppa = () => {
 
 const styles = StyleSheet.create({
   headerImg: {
-    height: 50,
-    width: 200,
+    height: 40,
+    width: 190,
     resizeMode: 'contain',
   },
   headerImgContainer: {

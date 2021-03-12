@@ -8,10 +8,26 @@ import { useDispatch } from 'react-redux';
 
 
 const PizzaCheck = ({navigation, route}) => {
+    const [numberOf, setNumberOf] = useState(1);
     const data = route.params.data;
     const price = counter(data.key, data.pohja, data.added, data.removed, data.viipale);
     data.price = price;
     const dispatch = useDispatch();
+
+    const setNumberHigher = () => {
+        if (numberOf < 20) {
+            setNumberOf(numberOf + 1);
+        }
+    }
+    const setNumberLower = () => {
+        if (numberOf > 1) {
+            setNumberOf(numberOf - 1);
+        }
+    }
+
+    const priceCounter = () => {
+        return data.price * numberOf;
+    }
 
     const pohjaprizeText = (pohja) => {
         switch(pohja) {
@@ -80,7 +96,11 @@ const PizzaCheck = ({navigation, route}) => {
             vs: data.vs,
             viipale: data.viipale,
         }
-        dispatch({type: 'ADD_TO_CART', payload: toCart})
+        let i = 0
+        while (i < numberOf) {
+            dispatch({type: 'ADD_TO_CART', payload: toCart})
+            i++;
+        }
         navigation.popToTop()
     }
 
@@ -111,10 +131,29 @@ const PizzaCheck = ({navigation, route}) => {
                             {oregano()}
                             {vs()}
                         </View>
-                        <View style={styles.priceContainer}>
-                            <Text style={styles.priceText} >{price.toFixed(2)} €</Text>
+                    <View style={styles.bottomComponents}>
+                        <View style={styles.promptContainer}>
+                            <Text style={styles.prompt}>Valitse kappalemäärä</Text>
+                        </View>
+                        <View style={styles.ammountContainer}>
+                            <TouchableOpacity style={styles.ammountChangeButton} onPress={() => setNumberLower()}>
+                                <Icon name="remove-outline" size={26} color="firebrick" />
+                            </TouchableOpacity>
+                            <Text style={styles.ammountText}>{numberOf}</Text>
+                            <TouchableOpacity style={styles.ammountChangeButton} onPress={() => setNumberHigher()}>
+                                <Icon name="add-outline" size={26} color="green" />
+                            </TouchableOpacity>
                         </View>
                     </View>
+                    <View style={styles.priceArea}>
+                        <View style={styles.promptContainer}>
+                            <Text style={styles.prompt}>Loppusumma:</Text>
+                        </View>
+                        <View style={styles.priceContainer}>
+                            <Text style={styles.price}>{priceCounter().toFixed(2)} €</Text>
+                        </View>
+                    </View>
+                </View>
             </View>
             <TouchableOpacity style={styles.button} onPress={() => finishAction()}>
                 <Text>Lisää ostoskoriin</Text>
@@ -124,13 +163,48 @@ const PizzaCheck = ({navigation, route}) => {
 }
 
 const styles = StyleSheet.create({
+    ammountContainer: {
+        flexDirection: "row",
+    },
+    ammountChangeButton: {
+        paddingHorizontal: 10
+    },
+    ammountText: {
+        fontSize: 20
+    },
+    promptContainer: {
+        alignSelf:"center",
+        alignItems:"center",
+        justifyContent:"center"
+    },
+    bottomComponents: {
+        marginTop: "5%",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        paddingVertical: 10
+    },
+    priceArea: {
+        marginBottom: "5%",
+        flexDirection: "row",
+        justifyContent: "space-between",
+    },
+    priceContainer: {
+        alignItems: "center",
+        justifyContent: "center",
+        alignSelf: "center",
+        paddingHorizontal:10
+    },
+    price: {
+        fontSize: 20,
+        fontFamily: "Verdana"
+    },
     container: {
-        flex: 11
+        flex: 1
     },
     button: {
         alignItems: "center",
         backgroundColor: "#f4e609",
-        flex: 1,
+        height:"8%",
         width: "100%",
         justifyContent: "center",
     },
@@ -164,7 +238,6 @@ const styles = StyleSheet.create({
         borderBottomColor: "#cdcdcd",
         borderBottomWidth: 1,
         flex: 1,
-
     },
     pohjaText: {
         fontSize: 20
@@ -184,17 +257,6 @@ const styles = StyleSheet.create({
     },
     extrasText: {
         fontSize: 20
-    },
-    textinputContainer: {
-        backgroundColor: "#edeeef"
-    },
-    priceContainer: {
-        alignItems: "center",
-        justifyContent: "center",
-        flex: 2
-    },
-    priceText: {
-        fontSize: 24
     },
 });
 

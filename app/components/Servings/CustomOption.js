@@ -74,7 +74,12 @@ const CustomOption = ({navigation, data}) => {
             <View style={styles.titleContainer}>
                 <Text style={styles.title}>{mainChoice.name}</Text>
             </View>
+            <View style={styles.descriptionContainer}>
+                <Text style={styles.descriptionTitle}>Tuotteen kuvaus</Text>
+                <Text style={styles.description}>Naposteltavaa pikkunälkään tai annoksen kylkeen.</Text>
+            </View>
             <View style={styles.picker}>
+                <Text style={styles.pickerText}>Naposteltavan tuotteen valinta</Text>
                 <Picker prompt="Sides and Dips"
                         selectedValue={mainChoice}
                         onValueChange={(itemValue, itemIndex) => 
@@ -86,6 +91,7 @@ const CustomOption = ({navigation, data}) => {
             </View>
             <View>
                 <View style={styles.picker}>
+                    <Text style={styles.pickerText}>Valitse dippisi</Text>
                     <Picker prompt="Valitse dippi"
                             selectedValue={sideChoice}
                             onValueChange={(itemValue, itemIndex) => 

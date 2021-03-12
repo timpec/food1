@@ -24,6 +24,7 @@ const Cart = ({navigation}) => {
   return (
       <SafeAreaView  style={{ flex: 1, backgroundColor: "#f5f5f5"}}>
       <ScrollView contentContainerStyle={{flexGrow:1}}>
+        <View style={{flex:1}}>
         <View style={styles.headerContainer}>
           <Text style={styles.header}>Ostoskorissa {productsInCart.length} tuote(tta).</Text>
           <TouchableOpacity onPress={() => dispatch({type: 'CLEAR_CART'})}>
@@ -40,8 +41,9 @@ const Cart = ({navigation}) => {
         <View style={styles.finalPriceContainer}>
           <Text style={styles.finalPrice}>Välisumma: {cartPrice(productsInCart).toFixed(2)} €</Text>
         </View>
-        {continueButton()}
+        </View>
         </ScrollView>
+        {continueButton()}
       </SafeAreaView>
   );
 }
@@ -51,7 +53,8 @@ const Cart = ({navigation}) => {
 
 const styles = StyleSheet.create ({
   headerContainer: {
-    height: 50,
+    flex:1,
+    height: "8%",
     flexDirection: "row",
     marginHorizontal: "5%",
     alignItems: "center",
@@ -65,10 +68,12 @@ const styles = StyleSheet.create ({
     fontFamily: "Verdana"
   },
   productContainer: {
-    flex: 1,
+    flex: 30,
   },
   finalPriceContainer: {
-    height: 50,
+    flex:1,
+    height: "8%",
+    marginVertical: "3%",
     width: "90%",
     alignSelf: "center",
     alignItems: "flex-start",
@@ -80,7 +85,7 @@ const styles = StyleSheet.create ({
   },
   nextButton: {
     width: "100%",
-    height: 50,
+    height: "8%",
     backgroundColor: "#f4e609",
     alignItems: "center",
     justifyContent: "center"
