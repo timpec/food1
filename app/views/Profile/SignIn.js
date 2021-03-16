@@ -1,11 +1,12 @@
 import React from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, TextInput, View, Text, Image, TouchableOpacity  } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, TextInput, View, Text, Image, TouchableOpacity, ImageBackground  } from 'react-native';
 
 
 const SignIn = ({navigation}) => {
 
   return (
       <SafeAreaView  style={{ flex: 1, backgroundColor: "#f5f5f5"}}>
+        <ImageBackground source={require('../../assets/bg_shop3.jpeg')} style={{flex: 1,resizeMode: "cover",justifyContent: "center"}}>
           <View style={styles.upperContainer} >
             <Image style={styles.topImage} source={require('../../assets/pizzataximlogo1.png')}/>
           </View>
@@ -22,12 +23,13 @@ const SignIn = ({navigation}) => {
               <Text style={{color: "black", fontFamily: "Verdana", fontSize: 16}} >Kirjaudu sisään</Text>
             </TouchableOpacity>
             <TouchableOpacity style={{marginTop: "5%", width: "90%",  alignItems: "center"}} >
-              <Text style={{color: "black", fontFamily: "Verdana", fontSize: 16}} >Unohditko salasanasi?</Text>
+              <Text style={{color: "white", fontFamily: "Verdana", fontSize: 16}} >Unohditko salasanasi?</Text>
             </TouchableOpacity>
             <TouchableOpacity style={{marginTop: "5%", width: "90%",  alignItems: "center"}} >
-              <Text onPress={() => navigation.push('Register')} style={{color: "black", fontFamily: "Verdana", fontSize: 16}} >Luo tili</Text>
+              <Text onPress={() => navigation.push('Register')} style={{color: "white", fontFamily: "Verdana", fontSize: 16}} >Luo tili</Text>
             </TouchableOpacity>
           </View>
+          </ImageBackground>
       </SafeAreaView>
   );
 }

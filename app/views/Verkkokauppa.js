@@ -24,7 +24,8 @@ import OrderConfirmed from './Cart/OrderConfirmed';
 import { Image, StyleSheet, View } from 'react-native';
 
 const Verkkokauppa = () => {
-  const productsInCart = useSelector(state => state.productsInCart)
+  const productsInCart = useSelector(state => state.cart.productsInCart)
+  const userStore = useSelector(state => state.user.user)
 
   const Tabs = createBottomTabNavigator();
   const MenuStack = createStackNavigator();
@@ -58,7 +59,7 @@ const Verkkokauppa = () => {
       <CartStack.Screen name="Cart" component={Cart} options={{title: "Ostoskori"}} />
       <CartStack.Screen name="OrderDetails" component={OrderDetails} options={{title: "Toimitustiedot"}} />
       <CartStack.Screen name="OrderSend" component={OrderSend} options={{title: "Tilauksen lähetys"}} />
-      <CartStack.Screen name="OrderConfirmed" component={OrderConfirmed} options={{headerLeft: null}} />
+      <CartStack.Screen name="OrderConfirmed" component={OrderConfirmed} options={{title: "Tilausvarmistus", headerLeft: null}} />
     </CartStack.Navigator>
   )
 

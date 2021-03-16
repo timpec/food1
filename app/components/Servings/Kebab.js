@@ -1,23 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/Ionicons';
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
+import CheckBox from '@react-native-community/checkbox';
 import { Picker } from '@react-native-picker/picker';
 import { useDispatch } from 'react-redux';
 import servingStyles from '../Servings/Styles/ServingStyles'
 import { priceCounter, setNumberLower, setNumberHigher } from './SharedFunctions';
 
 
-const Kebab = ({navigation, data}) => {
+const Kebab = ({navigation, data, checkbox}) => {
     const dispatch = useDispatch();
     const [mainChoice, setMainChoice] = useState(data[0])
     const [sideChoice, setSideChoice] = useState(mainChoice.options[0])
     const [leftOption, setLeftOption] = useState('#f4e609')
     const [rightOption, setRightOption] = useState('#f5f5f5')
     const [numberOf, setNumberOf] = useState(1);
+    const [nosalad, setNosalad] = useState(false);
     const sideOptions = mainChoice.options;
-
 
     const mainPress = (button) => {
         if (button == data[0]) {
@@ -31,14 +32,25 @@ const Kebab = ({navigation, data}) => {
         }
     }
 
+    const renderCheckbox = () => {
+        if (checkbox != false) {
+            return (
+                <View style={styles.extraItem}>
+                    <CheckBox style={styles.checkBox} value={nosalad} onValueChange={(newValue)=>setNosalad(newValue)} />
+                    <Text>Ei salaattia</Text>
+                </View>
+            )
+        }
+    }
+
     const cartObj = () => {
         const object = {
             key: uuidv4(),
             type: 'SERVING',
             id: mainChoice.id+sideChoice.id,
             name: mainChoice.name+' '+sideChoice.name,
-            price: sideChoice.price
-            //Salaatti checkbox?
+            price: sideChoice.price,
+            noSalad: nosalad
         }
         return object;
     }
@@ -81,6 +93,7 @@ const Kebab = ({navigation, data}) => {
                             )}
                 </Picker>
             </View>
+            {renderCheckbox()}
         </View>
         <View style={styles.bottomComponents}>
             <View style={styles.promptContainer}>

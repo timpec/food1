@@ -45,10 +45,15 @@ export const checkType = (item) => {
         )
 
       case 'SERVING':
+        let extra;
+        if (item.noSalad != undefined && item.noSalad == true) {
+          extra = <Text style={styles.title}>Ei salaattia</Text>
+        }
         return (
           <View style={styles.card}>
             <View style={styles.titleText}>
               <Text style={styles.title}>{item.id}. {item.name}</Text>
+              {extra}
               <Text style={styles.priceText} >{item.price.toFixed(2)} €</Text>
             </View>
             <View style={styles.priceContainer}>
@@ -112,7 +117,6 @@ export const checkType = (item) => {
 
   // For final view of cart (simple)
   export const checkTypeSimple = (item) => {
-    const dispatch = useDispatch();
       switch (item.type) {
         case 'PIZZA':
           return (
@@ -134,10 +138,15 @@ export const checkType = (item) => {
           )
   
         case 'SERVING':
+          let extra;
+          if (item.noSalad != undefined && item.noSalad == true) {
+            extra = <Text style={styles.title}>Ei salaattia</Text>
+          }
           return (
             <View style={styles.card}>
               <View style={styles.titleText}>
                 <Text style={styles.title}>{item.id}. {item.name}</Text>
+                {extra}
               </View>
               <View style={styles.priceContainer}>
                 <Text style={styles.priceText} >{item.price.toFixed(2)} €</Text>

@@ -5,14 +5,14 @@ import { v4 as uuidv4 } from 'uuid';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import fetchPost from '../../modules/mailer';
-import { alvAmmount, cartPrice, checkTypeSimple } from '../../components/Cart/CartBuilder';
+import { cartPrice, checkTypeSimple } from '../../components/Cart/CartBuilder';
 
 
 const OrderSend = ({navigation, route}) => {
     const [info, setInfo] = useState("")
-
     const routeDetails = route.params.details
-    const productsInCart = useSelector(state => state.productsInCart)
+    const productsInCart = useSelector(state => state.cart.productsInCart)
+    const userStore = useSelector(state => state.user.user)
     const dispatch = useDispatch();
 
     const deliveryType = () => {
@@ -23,16 +23,35 @@ const OrderSend = ({navigation, route}) => {
       }
     }
 
+    const deliveryCost = () => {
+      if (routeDetails.toimitustapa == "Kuljetus" && cartPrice(productsInCart) < 17) {
+        return <Text>Kuljetusmaksu: 3.00 €</Text>
+      } else if (routeDetails.toimitustapa == "Kuljetus") {
+        return <Text>Kuljetusmaksu: 0 €</Text>
+      }
+    }
+
+    const totalCost = () => {
+      if (routeDetails.toimitustapa == "Kuljetus" && cartPrice(productsInCart) < 17) {
+        return cartPrice(productsInCart) + 3;
+      } else {
+        return cartPrice(productsInCart);
+      }
+    }
+
     const wait4Response = async () => {
       const order = {
         token: 'pizzataxim',
+        orderUser: userStore.fname+" "+userStore.lname,
+        orderEmail: userStore.email,
         orderType: routeDetails.toimitustapa,
         orderDetail: deliveryType(),
         orderPhone: routeDetails.puhelin,
         orderPayment: routeDetails.maksutapa,
-        orderPrice: cartPrice(productsInCart),
-        orderAlv: alvAmmount(productsInCart),
-        orderProducts: productsInCart
+        orderPrice: totalCost(),
+        orderAlv: totalCost()*0.14,
+        orderProducts: productsInCart,
+        orderComment: info
       }
       try {
         let result = await fetchPost(order);
@@ -57,6 +76,7 @@ const OrderSend = ({navigation, route}) => {
             <View style={{flexDirection: "row", justifyContent: "space-between", width: "90%", alignSelf: "center"}}>
                 <View style={styles.h2ContainerRight}>
                     <Text style={styles.h2}>Toimitus</Text>
+                    <Text>{userStore.fname} {userStore.lname}</Text>
                     <Text>{routeDetails.toimitustapa}</Text>
                     <Text>{deliveryType()}</Text>
                     <Text>{routeDetails.puhelin}</Text>
@@ -64,8 +84,9 @@ const OrderSend = ({navigation, route}) => {
                 <View style={styles.h2ContainerLeft}>
                     <Text style={styles.h2}>Maksu</Text>
                     <Text>{routeDetails.maksutapa}</Text>
-                    <Text>ALV 14%: {alvAmmount(productsInCart).toFixed(2)} €</Text>
-                    <Text>Loppusumma: {cartPrice(productsInCart).toFixed(2)} €</Text>
+                    {deliveryCost()}
+                    <Text>Loppusumma: {totalCost().toFixed(2)} €</Text>
+                    <Text>ALV 14%: {(totalCost()*0.14).toFixed(2)} €</Text>
                 </View>
             </View>
                 <View style={{width: "90%", alignSelf: "center", marginTop: "8%"}}>

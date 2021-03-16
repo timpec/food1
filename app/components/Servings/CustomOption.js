@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Icon from 'react-native-vector-icons/dist/Ionicons';
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
-import { StyleSheet, Text, TouchableOpacity, View, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, ScrollView } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useDispatch } from 'react-redux';
 import servingStyles from '../Servings/Styles/ServingStyles'
@@ -36,18 +36,18 @@ const CustomOption = ({navigation, data}) => {
             case 0:
                 return addedSides.length + mainChoice.price;
             case 1:
-                if (addedSides.length != 0) {
+                if (addedSides.length <= 1) {
+                    return mainChoice.price;
+                }
+                else {
                     return addedSides.length + mainChoice.price - 1;
                 }
-                else {
-                    return addedSides.length + mainChoice.price;
-                }
             case 2:
-                if (addedSides.length != 0) {
-                    return addedSides.length + mainChoice.price - 2;
+                if (addedSides.length <= 2) {
+                    return mainChoice.price;
                 }
                 else {
-                    return addedSides.length + mainChoice.price;
+                    return addedSides.length + mainChoice.price - 2;
                 }
         }
     }

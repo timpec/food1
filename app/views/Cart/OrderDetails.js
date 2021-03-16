@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 import { SafeAreaView, Text, View, StyleSheet, ScrollView, TouchableOpacity, TextInput } from 'react-native';
+import { useSelector } from 'react-redux';
 import { Picker } from '@react-native-picker/picker';
 import 'react-native-get-random-values';
-import { v4 as uuidv4 } from 'uuid';
 
 
 const OrderDetails = ({navigation, route}) => {
+  const userStore = useSelector(state => state.user.user)
+
   const toimitus = ["Kuljetus", "Nouto"];
   const noutoajat = ["15", "30", "45", "60"];
   const maksu = ["Käteinen", "Maksukortti", "Lounasseteli", "ePassi"];
   const [toimitustapa, setToimitustapa] = useState(toimitus[0])
   const [maksutapa, setMaksutapa] = useState(maksu[0])
-  const [osoite, setOsoite] = useState("")
+  const [osoite, setOsoite] = useState(userStore.address+" "+userStore.door)
   const [nouto, setNouto] = useState(noutoajat[0])
-  const [puhelin, setPuhelin] = useState("")
+  const [puhelin, setPuhelin] = useState(userStore.phone)
 
   // 
   const deliveryType = () => {

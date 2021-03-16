@@ -136,7 +136,18 @@ const servingStyles = {
         marginBottom: "5%",
         flexDirection: "row",
         justifyContent: "space-between",
-    }
+    },
+    extraItem: {
+        marginTop: "5%",
+        flexDirection: "row",
+        alignItems: "center"
+    },
+    checkBox: {
+        transform: [
+            {scaleX: 1.3},
+            {scaleY: 1.3}
+        ]
+    },
 };
 
 

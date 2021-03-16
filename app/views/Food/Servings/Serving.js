@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { SafeAreaView } from 'react-native';
 
 import { kebabAnnokset, kanaAnnokset, vonerAnnokset, falafelAnnokset, rullaAnnokset, zoneAnnokset, salaattiAnnokset, juomat, sides } from '../../../data/data';
@@ -22,7 +22,7 @@ const Serving = ({navigation, route}) => {
             case ('Salaatti'):
                 return <MultiMainMultiSide navigation={navigation} data={salaattiAnnokset} />
             case ('Rulla'):
-                return <Kebab navigation={navigation} data={rullaAnnokset} />
+                return <Kebab navigation={navigation} data={rullaAnnokset} checkbox={false}/>
             case ('Vöner'):
                 return <MultiSideOption navigation={navigation} data={vonerAnnokset} />
             case ('Zone'):

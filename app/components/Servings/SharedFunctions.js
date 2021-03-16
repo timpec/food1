@@ -14,6 +14,5 @@ export const setNumberLower = (numberOf) => {
 }
 
 export const priceCounter = (price, numberOf) => {
-    console.log(price, numberOf)
     return price * numberOf;
 }

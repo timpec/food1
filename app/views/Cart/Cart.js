@@ -8,7 +8,7 @@ import { cartPrice, checkType } from '../../components/Cart/CartBuilder';
 
 
 const Cart = ({navigation}) => {
-  const productsInCart = useSelector(state => state.productsInCart)
+  const productsInCart = useSelector(state => state.cart.productsInCart)
   const dispatch = useDispatch();
 
   const continueButton = () => {

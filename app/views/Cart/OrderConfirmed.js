@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
-import { SafeAreaView, Text, View, StyleSheet, ScrollView, TouchableOpacity, TextInput } from 'react-native';
+import React from 'react';
+import { SafeAreaView, Text, View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { useSelector } from 'react-redux';
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
-import { alvAmmount, cartPrice, checkTypeSimple } from '../../components/Cart/CartBuilder';
+import { checkTypeSimple } from '../../components/Cart/CartBuilder';
 
 
 const OrderConfirmed = ({navigation, route}) => {
     const routeDetails = route.params.order
+    const productsInCart = useSelector(state => state.cart.productsInCart)
 
+    const deliveryCost = () => {
+      if (routeDetails.toimitustapa == "Kuljetus" && cartPrice(productsInCart) < 17) {
+        return <Text>Kuljetusmaksu: 3.00 €</Text>
+      } else if (routeDetails.toimitustapa == "Kuljetus") {
+        return <Text>Kuljetusmaksu: 0 €</Text>
+      }
+    }
 
   return (
     <SafeAreaView  style={{ flex: 1, backgroundColor: "#f5f5f5"}}>
@@ -19,6 +28,7 @@ const OrderConfirmed = ({navigation, route}) => {
             <View style={{flexDirection: "row", justifyContent: "space-between", width: "90%", alignSelf: "center"}}>
                 <View style={styles.h2ContainerRight}>
                     <Text style={styles.h2}>Toimitus</Text>
+                    <Text>{routeDetails.orderUser}</Text>
                     <Text>{routeDetails.orderType}</Text>
                     <Text>{routeDetails.orderDetail}</Text>
                     <Text>{routeDetails.orderPhone}</Text>
@@ -26,6 +36,7 @@ const OrderConfirmed = ({navigation, route}) => {
                 <View style={styles.h2ContainerLeft}>
                     <Text style={styles.h2}>Maksu</Text>
                     <Text>{routeDetails.orderPayment}</Text>
+                    {deliveryCost()}
                     <Text>ALV 14%: {routeDetails.orderAlv.toFixed(2)} €</Text>
                     <Text>Summa: {routeDetails.orderPrice.toFixed(2)} €</Text>
                 </View>
@@ -43,7 +54,7 @@ const OrderConfirmed = ({navigation, route}) => {
                 <View style={{marginTop:"3%"}}></View>
             </View>
             <TouchableOpacity style={styles.nextButton} onPress={() => navigation.popToTop()} >
-                <Text>Palaa etusivulle</Text>
+                <Text>Palaa ostoskoriin</Text>
             </TouchableOpacity>
         </ScrollView>
     </SafeAreaView>
