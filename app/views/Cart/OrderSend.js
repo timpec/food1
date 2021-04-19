@@ -56,10 +56,12 @@ const OrderSend = ({navigation, route}) => {
       try {
         let result = await fetchPost(order);
         console.log(result)
-        if (result.message == 200) {
-          console.log("check")
+        if (result.message == "Success") {
+          console.log("order Success")
           navigation.push('OrderConfirmed', {order})
           dispatch({type: 'CLEAR_CART'})
+        } else {
+          //error
         }
       } catch (err) {
         // Add toast or something telling the problem to customer

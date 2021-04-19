@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/dist/Ionicons';
 import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View, ScrollView  } from 'react-native';
 import 'react-native-get-random-values';
@@ -21,9 +21,6 @@ const PizzaDetails = ({navigation, route}) => {
     const [vsCheck, setVSCheck] = useState(false);
     const [viipaleCheck, setViipaleCheck] = useState(false);
 
-    useEffect(() => {
-        //setToppings(editableToppings)
-    }, []);
 
     const addItem = (item) => {
         toppings.push(item)
@@ -66,7 +63,6 @@ const PizzaDetails = ({navigation, route}) => {
     const checkAdds = () => {
         const result = [];
         let tempAdded = [...added]
-        console.log(tempAdded)
         let uniq = new Set();
         for (let i in pizza.toppings) {
             for (let x in added) {

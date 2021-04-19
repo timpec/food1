@@ -91,7 +91,7 @@ const Info = () => {
                 <View style={styles.smallTopicContainer}>
                   <Text style={styles.smallTitle}>Tilausvahvistus</Text>
                   <Text style={styles.text}>
-                  Vastaanotettuamme tilauksen lähetämme teille tilausvahvistuksen sähköpostilla (Gmail, Hotmail, Yahoo käyttäjä tarkista kaikki viestit ja roskakori) , joka on hyvä säästää siihen asti kunnes tilaus on saapunut. On ensiarvoisen tärkeää että ilmoitetut yhteystiedot ovat oikeita jotta vahvistukset tulevat perille.
+                  Vastaanotettuamme tilauksen lähetämme teille tilausvahvistuksen sähköpostilla (Gmail, Hotmail, Yahoo käyttäjä tarkista kaikki viestit ja roskakori) , joka on hyvä säästää siihen asti kunnes tilaus on saapunut. On ensiarvoisen tärkeää että ilmoitetut yhteystiedot ovat oikeita jotta vahvistukset tulevat perille. Jos tilausvahvistus ei tule sähköpostiinne, pyydämme teitä ottamaan yhteyden ravintolaan.
                   </Text>
                 </View>
 

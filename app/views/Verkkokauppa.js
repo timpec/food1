@@ -93,12 +93,14 @@ const Verkkokauppa = () => {
           <Tabs.Screen name='Menu' component={MenuStackScreen} options={{title: "Ruokalista"}} />
           <Tabs.Screen name='Cart' component={CartStackScreen} options={{title: "Ostoskori", tabBarBadge: productsInCart.length}} />
           <Tabs.Screen name='Info' component={Info} options={{title: "Tietoja"}} />
-          <Tabs.Screen name='SignIn' component={AuthStackScreen} options={{title: "Käyttäjätili"}} />
+          <Tabs.Screen name='SignIn' component={Register} options={{title: "Tilaustiedot"}} />
         </Tabs.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
   );
 }
+
+//component={AuthStackScreen}
 
 
 const styles = StyleSheet.create({

@@ -51,7 +51,9 @@ const OrderConfirmed = ({navigation, route}) => {
                   </View>
                   )}
                 </View>
-                <View style={{marginTop:"3%"}}></View>
+                <View style={{marginVertical:"3%"}}>
+                  <Text style={{alignSelf:'center'}}>Tarkista tilausvarmistus sähköpostistasi</Text>
+                </View>
             </View>
             <TouchableOpacity style={styles.nextButton} onPress={() => navigation.popToTop()} >
                 <Text>Palaa ostoskoriin</Text>
